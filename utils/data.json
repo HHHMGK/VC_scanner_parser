@@ -1,5 +1,5 @@
 {
-    "keywords": [
+    "keyword": [
         "boolean",
         "break",
         "continue",
@@ -12,7 +12,7 @@
         "void",
         "while"
     ],
-    "operators" : [
+    "operator" : [
         "+",
         "-",
         "*",
@@ -37,6 +37,18 @@
         "]",
         ";",
         ","
+    ],
+    "comment": "//",
+    "multi_comment": ["\/*", "*\/"],
+    "escape": [
+        "\\b",
+        "\\f",
+        "\\n",
+        "\\r",
+        "\\t",
+        "\\'",
+        "\\\"",
+        "\\'",
+        "\\"
     ]
-    
 }
