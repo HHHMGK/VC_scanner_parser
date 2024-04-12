@@ -115,6 +115,27 @@ digraph G {
     {
         // {
         state_open_bracket_1 [label = "23"]; // STATE 23
-        start_state
+        start_state -> state_open_bracket_1 [label = "{"];
+        // }
+        state_close_bracket_1 [label = "24"]; // STATE 24
+        start_state -> state_close_bracket_1 [label = "}"];
+        // [
+        state_open_bracket_2 [label = "25"]; // STATE 25
+        start_state -> state_open_bracket_2 [label = "["];
+        // ]
+        state_close_bracket_2 [label = "26"]; // STATE 26
+        start_state -> state_close_bracket_2 [label = "]"];
+        // (
+        state_open_bracket_3 [label = "27"]; // STATE 27
+        start_state -> state_open_bracket_3 [label = "("];
+        // )
+        state_close_bracket_3 [label = "28"]; // STATE 28
+        start_state -> state_close_bracket_3 [label = ")"];
+        // ;
+        state_semicolon [label = "29"]; // STATE 29
+        start_state -> state_semicolon [label = ";"];
+        // ,
+        state_comma [label = "30"]; // STATE 30
+        start_state -> state_comma [label = ","];
     }
 }
