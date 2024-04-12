@@ -15,37 +15,106 @@
 digraph G {
     // Layout
     rankdir = LR;
-    splines = polyline;
+    splines = true;
 
     // Start state.
     node [shape = point];
     start;
     node [shape = circle];
-    start_state [label = "0"];
+    start_state [label = "0"]; // STATE 0
 
     start -> start_state;
     node [shape = doublecircle; color = red];
-    state_error [label = "666"]; // Error.
+    state_error [label = "666"]; // STATE Error 
 
     node [shape = doublecircle; color = black];
     state_identifier [label = "999"]; // Identifier.
-    state_eof [label = "888"]; // End Of File.
+    state_eof [label = "888"]; // STATE End Of File.
 
-  // Note: Stop states are either:
-  // 1. A keyword.
-  // 2. A valid identifier.
-  // 3. A valid number (integer/float).
-  // 4. A valid operator.
-  // 5. A valid separator.
-  // 6. A valid string.
-  // 7. A valid comment.
-  // 8. End Of File.
-  // 9. Error.
-
-    // Keywords
+    // Detect Numeric token
     {
-        // Hai
+        // integer
+        state_integer [label = "1"]; // STATE 1
+        start_state -> state_integer [label = "0-9"];
+        state_integer -> state_integer [label = "0-9"];
+        // float
+        // (0-9)*.
+        // (0-9)*.(0-9)*
+        state_float_1 [label = "2"]; // STATE 2
+        state_integer -> state_float_1 [label = "dot '.'"];
+        state_float_1 -> state_float_1 [label = "0-9"];
+        // (0-9)* (E|e)+ (0-9)
+        state_E_e_after_int [label = "3" shape = "circle"]; // STATE 3
+        state_integer -> state_E_e_after_int [label = "'e' | 'E'"];
+        state_float_2 [label = "4"]; // STATE 4
+        state_E_e_after_int -> state_float_2 [label = "0-9"];
+        state_float_2 -> state_float_2 [label = "0-9"];
+        // (0-9)*.(0-9)+ (E|e)* (0-9)+
+        state_float_1 -> state_E_e_after_int [label = "'e' | 'E'"];
+        // (0-9)*.(0-9)+ (E|e)* (+|-) (0-9)+
+        state_sign_after_E_e [label = "5" shape = "circle"]; // STATE 5
+        state_E_e_after_int -> state_sign_after_E_e [label = "+ | -"]; 
+        state_sign_after_E_e -> state_float_2 [label = "0-9"];
+        // .(0-9)*
+        state_dot [label = "6" shape = "circle"]; // STATE 6
+        start_state -> state_dot [label = "dot '.'"];
+        state_dot -> state_float_1 [label = "0-9"];
+    }
+    
+    // detect operators
+    {
+        // + plus
+        state_plus [label = "7"]; // STATE 7
+        start_state -> state_plus [label = "+"];
+        // - minus
+        state_minus [label = "8"]; // STATE 8
+        start_state -> state_minus [label = "-"];
+        // / division
+        state_division [label = "9"]; // STATE 9
+        start_state -> state_division [label = "/"];
+        // * multiply
+        state_multiply [label = "10"]; // STATE 10
+        start_state -> state_multiply [label = "*"];
+        // = assign
+        state_equal [label = "11"]; // STATE 11
+        start_state -> state_equal [label = "="];
+        // ==
+        state_compare [label = "12"]; // STATE 12
+        state_equal -> state_compare [label = "="];
+        // < less than
+        state_less_than [label = "13"]; // STATE 13
+        start_state -> state_less_than [label = "<"];
+        // <= less than or equal to
+        state_less_than_equal [label = "14"]; // STATE 14
+        state_less_than -> state_less_than_equal [label = "="];
+        // > greater than
+        state_greater_than [label = "15"]; // STATE 15
+        start_state -> state_greater_than [label = ">"];
+        // >= greater than or equal
+        state_greater_than_equal [label = "16"]; // STATE 16
+        state_greater_than -> state_greater_than_equal [label = "="];
+        // ! not operator
+        state_logical_not [label = "17"]; // STATE 17
+        start_state -> state_logical_not [label = "!"];
+        // != not equal
+        state_not_equal [label = "18"]; // STATE 18
+        state_logical_not -> state_not_equal [label = "="];
+        // || logical OR
+        state_OR_1 [label = "19" shape = "circle"]; // STATE 19
+        start_state -> state_OR_1 [label = "|"];
+        state_OR_2 [label = "20"]; // STATE 20
+        state_OR_1 -> state_OR_2 [label = "|"];
+        // && logical AND
+        state_AND_1 [label = "21" shape = "circle"]; // STATE 21
+        start_state -> state_AND_1 [label = "&"];
+        state_AND_2 [label = "22"]; // STATE 22
+        state_AND_1 -> state_AND_2 [label = "&"];
+    }
 
-        // Hiep
+    // Separators
+    {
+        // {
+        state_open_bracket_1 [label = "23"]; // STATE 23
+        start_state
     }
 }
