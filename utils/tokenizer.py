@@ -48,7 +48,6 @@ def tokenizer(text : str):
         
         if not in_comment:
             tokens.extend(line.split())
-    print(tokens)
     refined_tokens = []
 
     for tok in tokens:
@@ -75,28 +74,28 @@ def tokenizer(text : str):
         if tok == '':
             refined_tokens.remove(tok)
 
-    in_string = False
-    current_string = ''
-    for tok in refined_tokens:
-        i = tok.find('\"',0)
-        if i != -1:
-            if in_string:
-                current_string += tok[:i]
-                in_string = False
-            else:
-                current_string = tok[i:]
-                in_string = True
-        
+    # Fix for strings
+    i = 0
+    while i < len(refined_tokens): 
+        tok = refined_tokens[i]
+        if tok == "\"":
+            for j in range(i+1, len(refined_tokens)):
+                refined_tokens[i] += " " + refined_tokens[j]
+                if refined_tokens[j] == "\"":
+                    i = j
+                    refined_tokens[j] = ''
+                    break
+                refined_tokens[j] = ''
+        i+=1
 
+    # Fix for double operators like '==', '!=', '<=', '>=', '&&', '||'
     for i in range(len(refined_tokens)-1):
         if refined_tokens[i]!='' and refined_tokens[i+1]!='' and refined_tokens[i]+refined_tokens[i+1] in operator:
             print(i,i+1,refined_tokens[i], refined_tokens[i+1])
             refined_tokens[i] = refined_tokens[i]+refined_tokens[i+1]
             refined_tokens[i+1] = ''
 
-    for tok in refined_tokens:
-        if tok == '':
-            refined_tokens.remove(tok)
+    refined_tokens = [tok for tok in refined_tokens if tok != '']
 
     refined_tokens.append('$')
     return refined_tokens
