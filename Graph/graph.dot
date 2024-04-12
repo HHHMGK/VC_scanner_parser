@@ -13,5 +13,39 @@
 ] 
 */
 digraph G {
+    // Layout
+    rankdir = LR;
+    splines = polyline;
 
+    // Start state.
+    node [shape = point];
+    start;
+    node [shape = circle];
+    start_state [label = "0"];
+
+    start -> start_state;
+    node [shape = doublecircle; color = red];
+    state_error [label = "666"]; // Error.
+
+    node [shape = doublecircle; color = black];
+    state_identifier [label = "999"]; // Identifier.
+    state_eof [label = "888"]; // End Of File.
+
+  // Note: Stop states are either:
+  // 1. A keyword.
+  // 2. A valid identifier.
+  // 3. A valid number (integer/float).
+  // 4. A valid operator.
+  // 5. A valid separator.
+  // 6. A valid string.
+  // 7. A valid comment.
+  // 8. End Of File.
+  // 9. Error.
+
+    // Keywords
+    {
+        // Hai
+
+        // Hiep
+    }
 }
