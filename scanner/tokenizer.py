@@ -6,7 +6,7 @@ seperator = []
 escape = []
 comment = []
 multi_comment = []
-DATAJSON = './utils/data.json'
+DATAJSON = './scanner/data.json'
 with open(DATAJSON, 'r') as file:
     data = json.load(file)
     keyword = data['keyword']
