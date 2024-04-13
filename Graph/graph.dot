@@ -11,25 +11,23 @@
     "void",
     "while"
 ] 
+
 */
 digraph G {
-    // Layout
+    // Graph Layout
     rankdir = LR;
     splines = true;
 
-    // Start state.
-    node [shape = point];
-    start;
-    node [shape = circle];
-    start_state [label = "0"]; // STATE 0
-
+    // start state
+    start [shape = point];
+    start_state [label = "0" shape = circle]; // STATE 0
     start -> start_state;
-    node [shape = doublecircle; color = red];
-    state_error [label = "666"]; // STATE Error 
+
+    state_error [label = "-1" shape = doublecircle color = red]; // STATE Error 
 
     node [shape = doublecircle; color = black];
-    state_identifier [label = "999"]; // Identifier.
-    state_eof [label = "888"]; // STATE End Of File.
+    state_identifier [label = "999"]; // Identifier
+    state_end_file [label = "888"]; // STATE end file
 
     // Detect Numeric token
     {
@@ -137,5 +135,52 @@ digraph G {
         // ,
         state_comma [label = "30"]; // STATE 30
         start_state -> state_comma [label = ","];
+    }
+
+    // keywords
+    {
+        // boolean
+        state_boolean_1 [label = "30"]; // STATE 30 b
+        state_boolean_2 [label = "31"]; // STATE 31 bo 
+        state_boolean_3 [label = "32"]; // STATE 32 boo
+        state_boolean_4 [label = "33"]; // STATE 33 bool
+        state_boolean_5 [label = "34"]; // STATE 34 boole
+        state_boolean_6 [label = "35"]; // STATE 35 boolea
+        state_boolean_7 [label = "36"]; // STATE 36 boolean
+        start_state -> state_boolean_1 [label = "b"];
+        state_boolean_1 -> state_boolean_2 [label = "o"];
+        state_boolean_2 -> state_boolean_3 [label = "o"];
+        state_boolean_3 -> state_boolean_4 [label = "l"];
+        state_boolean_4 -> state_boolean_5 [label = "e"];
+        state_boolean_5 -> state_boolean_6 [label = "a"];
+        state_boolean_6 -> state_boolean_7 [label = "n"];
+        // break
+        state_break_1 [label = "37"]; // STATE 37 br
+        state_break_2 [label = "38"]; // STATE 38 bre
+        state_break_3 [label = "39"]; // STATE 39 brea
+        state_break_4 [label = "40"]; // STATE 40 break
+        state_boolean_1 -> state_break_1 [label = "r"];
+        state_break_1 -> state_break_2 [label = "e"];
+        state_break_2 -> state_break_3 [label = "a"];
+        state_break_3 -> state_break_4 [label = "k"];
+
+        
+    }
+
+    // identifier
+    {
+        // go from boolean
+        state_boolean_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o' and 'r'"];
+        state_boolean_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o'"];
+        state_boolean_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'l'"];
+        state_boolean_4 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_boolean_5 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'a'"];
+        state_boolean_6 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'n'"];
+        state_boolean_7 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from break
+        state_break_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_break_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'a'"];
+        state_break_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'k'"];
+        state_break_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
     }
 }
