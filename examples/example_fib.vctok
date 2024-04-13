@@ -20,7 +20,7 @@ twoaway
 ;
 putString
 (
-" How many Fibonacci numbers do you want to compute? "
+"How many Fibonacci numbers do you want to compute? "
 )
 ;
 n
@@ -37,14 +37,14 @@ n
 )
 putString
 (
-" The number should be positive.\n "
+"The number should be positive.\n"
 )
 ;
 else
 {
 putString
 (
-" \n\n\tI \t Fibonacci ( I ) \n\t = = = = = = = = = = = = = = = = = = = = = \n "
+"\n\n\tI \t Fibonacci(I) \n\t=====================\n"
 )
 ;
 next
@@ -72,7 +72,7 @@ i
 {
 putString
 (
-" \t "
+"\t"
 )
 ;
 putInt
@@ -82,7 +82,7 @@ i
 ;
 putString
 (
-" \t "
+"\t"
 )
 ;
 putIntLn
