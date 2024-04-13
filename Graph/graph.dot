@@ -229,10 +229,75 @@ digraph G {
         state_int_2 [label = "68"]; // STATE 68 int
         state_if_1 -> state_int_1 [label = "n"];
         state_int_1 -> state_int_2 [label = "t"];
+        // return 
+        state_return_1 [label = "69"]; // STATE 69 r
+        state_return_2 [label = "70"]; // STATE 70 re
+        state_return_3 [label = "71"]; // STATE 71 ret
+        state_return_4 [label = "72"]; // STATE 72 retu
+        state_return_5 [label = "73"]; // STATE 73 retur
+        state_return_6 [label = "74"]; // STATE 74 return
+        start_state -> state_return_1 [label = "r"];
+        state_return_1 -> state_return_2 [label = "e"];
+        state_return_2 -> state_return_3 [label = "t"];
+        state_return_3 -> state_return_4 [label = "u"];
+        state_return_4 -> state_return_5 [label = "r"];
+        state_return_5 -> state_return_6 [label = "n"];
+        // void
+        state_void_1 [label = "75"]; // STATE 75 v
+        state_void_2 [label = "76"]; // STATE 76 vo
+        state_void_3 [label = "77"]; // STATE 77 voi
+        state_void_4 [label = "78"]; // STATE 78 void
+        start_state -> state_void_1 [label = "v"];
+        state_void_1 -> state_void_2 [label = "o"];
+        state_void_2 -> state_void_3 [label = "i"];
+        state_void_3 -> state_void_4 [label = "d"];
+        // while 
+        state_while_1 [label = "79"]; // STATE 79 w
+        state_while_2 [label = "80"]; // STATE 80 wh
+        state_while_3 [label = "81"]; // STATE 81 whi
+        state_while_4 [label = "82"]; // STATE 82 whil
+        state_while_5 [label = "83"]; // STATE 83 while
+        start_state -> state_while_1 [label = "w"];
+        state_while_1 -> state_while_2 [label = "h"];
+        state_while_2 -> state_while_3 [label = "i"];
+        state_while_3 -> state_while_4 [label = "l"];
+        state_while_4 -> state_while_5 [label = "e"];
+        // true
+        state_true_1 [label = "84"]; // STATE 84 t
+        state_true_2 [label = "85"]; // STATE 85 tr
+        state_true_3 [label = "86"]; // STATE 86 tru
+        state_true_4 [label = "87"]; // STATE 87 true
+        start_state -> state_true_1 [label = "t"];
+        state_true_1 -> state_true_2 [label = "r"];
+        state_true_2 -> state_true_3 [label = "u"];
+        state_true_3 -> state_true_4 [label = "e"];
     }
 
     // identifier
     {
+        // go from true
+        state_true_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'r'"];
+        state_true_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'u'"];
+        state_true_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_true_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from while 
+        state_while_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'h'"];
+        state_while_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'i'"];
+        state_while_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'l'"];
+        state_while_4 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_while_5 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from void
+        state_void_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o'"];
+        state_void_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'i'"];
+        state_void_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'd'"];
+        state_void_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from return 
+        state_return_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_return_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 't'"];
+        state_return_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'u'"];
+        state_return_4 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'r'"];
+        state_return_5 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'n'"];
+        state_return_6 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
         // go from int
         state_int_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 't'"];
         state_int_2 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
