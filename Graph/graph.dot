@@ -5,21 +5,26 @@
     "else",
     "for",
     "float",
+    "false",
     "if",
     "int",
     "return",
     "void",
-    "while"
+    "while",
+    "true"
 ] 
 
 */
 digraph G {
     // Graph Layout
     rankdir = LR;
+    ranksep = 1.2
     splines = true;
+    edge [fontsize = 16];
+    node [width=".9"  height=".8" fontsize = 16];
 
     // start state
-    start [shape = point];
+    start [shape = point width=".2"  height=".2"];
     start_state [label = "0" shape = circle]; // STATE 0
     start -> start_state;
 
@@ -140,13 +145,13 @@ digraph G {
     // keywords
     {
         // boolean
-        state_boolean_1 [label = "30"]; // STATE 30 b
-        state_boolean_2 [label = "31"]; // STATE 31 bo 
-        state_boolean_3 [label = "32"]; // STATE 32 boo
-        state_boolean_4 [label = "33"]; // STATE 33 bool
-        state_boolean_5 [label = "34"]; // STATE 34 boole
-        state_boolean_6 [label = "35"]; // STATE 35 boolea
-        state_boolean_7 [label = "36"]; // STATE 36 boolean
+        state_boolean_1 [label = "31"]; // STATE 31 b
+        state_boolean_2 [label = "32"]; // STATE 32 bo 
+        state_boolean_3 [label = "33"]; // STATE 33 boo
+        state_boolean_4 [label = "34"]; // STATE 34 bool
+        state_boolean_5 [label = "35"]; // STATE 35 boole
+        state_boolean_6 [label = "36"]; // STATE 36 boolea
+        state_boolean_7 [label = "37"]; // STATE 37 boolean
         start_state -> state_boolean_1 [label = "b"];
         state_boolean_1 -> state_boolean_2 [label = "o"];
         state_boolean_2 -> state_boolean_3 [label = "o"];
@@ -155,22 +160,115 @@ digraph G {
         state_boolean_5 -> state_boolean_6 [label = "a"];
         state_boolean_6 -> state_boolean_7 [label = "n"];
         // break
-        state_break_1 [label = "37"]; // STATE 37 br
-        state_break_2 [label = "38"]; // STATE 38 bre
-        state_break_3 [label = "39"]; // STATE 39 brea
-        state_break_4 [label = "40"]; // STATE 40 break
+        state_break_1 [label = "38"]; // STATE 38 br
+        state_break_2 [label = "39"]; // STATE 39 bre
+        state_break_3 [label = "40"]; // STATE 40 brea
+        state_break_4 [label = "41"]; // STATE 41 break
         state_boolean_1 -> state_break_1 [label = "r"];
         state_break_1 -> state_break_2 [label = "e"];
         state_break_2 -> state_break_3 [label = "a"];
         state_break_3 -> state_break_4 [label = "k"];
-
-        
+        // continue
+        state_continue_1 [label = "42"]; // STATE 42 c
+        state_continue_2 [label = "43"]; // STATE 43 co
+        state_continue_3 [label = "44"]; // STATE 44 con
+        state_continue_4 [label = "45"]; // STATE 45 cont
+        state_continue_5 [label = "46"]; // STATE 46 conti
+        state_continue_6 [label = "47"]; // STATE 47 contin
+        state_continue_7 [label = "48"]; // STATE 48 continu
+        state_continue_8 [label = "49"]; // STATE 49 continue
+        start_state -> state_continue_1 [label = "c"];
+        state_continue_1 -> state_continue_2 [label = "o"];
+        state_continue_2 -> state_continue_3 [label = "n"];
+        state_continue_3 -> state_continue_4 [label = "t"];
+        state_continue_4 -> state_continue_5 [label = "i"];
+        state_continue_5 -> state_continue_6 [label = "n"];
+        state_continue_6 -> state_continue_7 [label = "u"];
+        state_continue_7 -> state_continue_8 [label = "e"];
+        // else
+        state_else_1 [label = "50"]; // STATE 50 e
+        state_else_2 [label = "51"]; // STATE 51 el
+        state_else_3 [label = "52"]; // STATE 52 els
+        state_else_4 [label = "53"]; // STATE 53 else
+        start_state -> state_else_1 [label = "e"];
+        state_else_1 -> state_else_2 [label = "l"];
+        state_else_2 -> state_else_3 [label = "s"];
+        state_else_3 -> state_else_4 [label = "e"];
+        // for
+        state_for_1 [label = "54"]; // STATE 54 f
+        state_for_2 [label = "55"]; // STATE 55 fo
+        state_for_3 [label = "56"]; // STATE 56 for
+        start_state -> state_for_1 [label = "f"];
+        state_for_1 -> state_for_2 [label = "o"];
+        state_for_2 -> state_for_3 [label = "r"];
+        // float
+        state_key_float_1 [label = "57"]; // STATE 57 fl
+        state_key_float_2 [label = "58"]; // STATE 58 flo
+        state_key_float_3 [label = "59"]; // STATE 59 floa
+        state_key_float_4 [label = "60"]; // STATE 60 float
+        state_for_1 -> state_key_float_1 [label = "l"];
+        state_key_float_1 -> state_key_float_2 [label = "o"];
+        state_key_float_2 -> state_key_float_3 [label = "a"];
+        state_key_float_3 -> state_key_float_4 [label = "t"];
+        // false
+        state_false_1 [label = "61"]; // STATE 61 fa
+        state_false_2 [label = "62"]; // STATE 62 fal
+        state_false_3 [label = "63"]; // STATE 63 fals
+        state_false_4 [label = "64"]; // STATE 64 false
+        state_for_1 -> state_false_1 [label = "a"];
+        state_false_1 -> state_false_2 [label = "l"];
+        state_false_2 -> state_false_3 [label = "s"];
+        state_false_3 -> state_false_4 [label = "e"];
+        // if
+        state_if_1 [label = "65"]; // STATE 65 i
+        state_if_2 [label = "66"]; // STATE 66 if
+        start_state -> state_if_1 [label = "i"];
+        state_if_1 -> state_if_2 [label = "f"];
+        // int
+        state_int_1 [label = "67"]; // STATE 67 in
+        state_int_2 [label = "68"]; // STATE 68 int
+        state_if_1 -> state_int_1 [label = "n"];
+        state_int_1 -> state_int_2 [label = "t"];
     }
 
     // identifier
     {
+        // go from int
+        state_int_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 't'"];
+        state_int_2 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from if
+        state_if_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'f', 'n'"];
+        state_if_2 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from false
+        state_false_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'l'"];
+        state_false_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 's'"];
+        state_false_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_false_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from float
+        state_key_float_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o'"];
+        state_key_float_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'a'"];
+        state_key_float_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 't'"];
+        state_key_float_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from for
+        state_for_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o', 'l', 'a'"];
+        state_for_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'r'"];
+        state_for_3 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from else
+        state_else_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'l'"];
+        state_else_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 's'"];
+        state_else_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_else_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+        // go from continue
+        state_continue_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o'"];
+        state_continue_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'n'"];
+        state_continue_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 't'"];
+        state_continue_4 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'i'"];
+        state_continue_5 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'n'"];
+        state_continue_6 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'u'"];
+        state_continue_7 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
+        state_continue_8 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
         // go from boolean
-        state_boolean_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o' and 'r'"];
+        state_boolean_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o', 'r'"];
         state_boolean_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'o'"];
         state_boolean_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'l'"];
         state_boolean_4 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'e'"];
@@ -182,5 +280,7 @@ digraph G {
         state_break_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'a'"];
         state_break_3 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'k'"];
         state_break_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+
+        state_identifier -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
     }
 }
