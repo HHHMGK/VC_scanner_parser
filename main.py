@@ -17,23 +17,30 @@ if __name__ == '__main__':
     with open(inpath, 'r') as file:
         data = file.read()
     
-    tokens = tokenizer.tokenizer2(data)
+    tokens, pos = tokenizer.tokenizer2(data)
     tokpath = Path(args.output_folder) / f"{args.filename}.vctok"
     with open(tokpath, 'w+') as file:
-        for tok, _ in tokens:
+        for tok in tokens:
             file.write(f"{tok}\n")
 
-    # verbose_tokens = scanner.scan_tokens(data)
-    verbose_tokens = tokens
+    # verbose_tokens = scanner.scan_tokens(tokens)
+    # verbose_tokens = tokens
     verbosepath = Path(args.output_folder) / f"{args.filename}.verbose.vctok"
     with open(verbosepath, 'w+') as file:
-        # for tok, state, kind in verbose_tokens:
-        #     tok, (line, col) = tok
-        #     file.write(f"Spelling = \"{tok}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})")
-        for tok in verbose_tokens:
-            tok, (line, col) = tok
-            state = 0
-            kind = "*"
+        for i in range(len(tokens)):
+            tok, state, kind = scanner.scan(tokens[i])
+            line, col = pos[i]
+            # print("tok = ", tok," s,k = ", state, kind)
             file.write(f"Spelling = \"{tok}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
+        # for i in range(len(verbose_tokens)):
+        #     tok, state, kind = verbose_tokens[i]
+        #     line, col = pos[i]
+        #     # print("tok = ", tok," s,k = ", state, kind)
+        #     file.write(f"Spelling = \"{tok}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
+        # for tok in verbose_tokens:
+        #     tok, (line, col) = tok
+        #     state = 0
+        #     kind = "*"
+        #     file.write(f"Spelling = \"{tok}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
     
     

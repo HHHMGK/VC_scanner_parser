@@ -105,6 +105,7 @@ def tokenizer2(text: str) -> list:
     
     lines = removeTabs(text).split('\n')
     tokens = []
+    pos = []
     cnt_line = 0
     in_multi_comment = False
     for line in lines:
@@ -127,7 +128,8 @@ def tokenizer2(text: str) -> list:
             # String
             if not in_string and line[i] == '\"' and (i == 0 or line[i-1] != '\\'):
                 if token != '':
-                    tokens.append((token,(cnt_line,i-len(token))))
+                    tokens.append(token)
+                    pos.append((cnt_line,i-len(token)))
                     token = ''
                 in_string = True
                 token += line[i]
@@ -159,7 +161,8 @@ def tokenizer2(text: str) -> list:
             
             if c2 != '' and c+c2 in operator:
                 if token != '':
-                    tokens.append((token,(cnt_line,i-len(token))))
+                    tokens.append(token)
+                    pos.append((cnt_line,i-len(token)))
                     token = ''
                 tokens.append((c+c2,(cnt_line,i)))
                 i += 2
@@ -167,10 +170,13 @@ def tokenizer2(text: str) -> list:
 
             if c in seperator + operator or c==' ':
                 if token != '':
-                    tokens.append((token,(cnt_line,i-len(token))))
+                    tokens.append(token)
+                    pos.append((cnt_line,i-len(token)))
                     token = ''
                 if c != ' ':
-                    tokens.append((c,(cnt_line,i)))
+                    # tokens.append((c,(cnt_line,i)))
+                    tokens.append(c)
+                    pos.append((cnt_line,i))
                 i += 1
                 continue
 
@@ -180,6 +186,8 @@ def tokenizer2(text: str) -> list:
 
         cnt_line += 1
 
-    tokens.append(('$', (cnt_line,0)))
-    return tokens   
+    # tokens.append(('$', (cnt_line,0)))
+    tokens.append('$')
+    pos.append((cnt_line,0))
+    return tokens, pos
 
