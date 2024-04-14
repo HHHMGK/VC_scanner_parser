@@ -28,7 +28,7 @@ digraph G {
     start_state [label = "0" shape = circle]; // STATE 0
     start -> start_state;
 
-    state_error [label = "-1" shape = doublecircle color = red]; // STATE Error 
+    state_error [label = "error" shape = doublecircle color = red]; // STATE Error 
 
     node [shape = doublecircle; color = black];
     state_identifier [label = "999"]; // Identifier
@@ -275,6 +275,8 @@ digraph G {
 
     // identifier
     {
+        // other cases
+        start_state -> state_identifier [label = "[a-z|A-Z|_] except 'b', 'c', 'e', 'f', 'i', 'r', 'v', 'w', 't'"];
         // go from true
         state_true_1 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'r'"];
         state_true_2 -> state_identifier [label = "[a-z|A-Z|0-9|_] except 'u'"];
@@ -347,5 +349,18 @@ digraph G {
         state_break_4 -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
 
         state_identifier -> state_identifier [label = "[a-z|A-Z|0-9|_]"];
+    }
+
+    // string literal
+    {
+        state_string_1 [label = "88" shape = "circle"]; // STATE 88 "
+        state_string_2 [label = "89" shape = "circle"]; // STATE 89 "\
+        state_string_3 [label = "90"]; // STATE 89 "\"
+        start_state -> state_string_1 [label = "\""];
+        state_string_1 -> state_string_1 [label = "anything except '\\', '\"'"];
+        state_string_1 -> state_string_2 [label = "\\"];
+        state_string_2 -> state_error [label = "anything except 'b', 'f', 'n', 'r', 't', '\'', '\"', '\\'"];
+        state_string_2 -> state_string_1 [label = "'b', 'f', 'n', 'r', 't', '\'', '\"', '\\'"];
+        state_string_1 -> state_string_3 [label = "\""];
     }
 }
