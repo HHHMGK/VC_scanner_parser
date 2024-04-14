@@ -125,7 +125,7 @@ def tokenizer2(text: str) -> list:
                 continue
             
             # String
-            if not in_string and line[i] == '\"':
+            if not in_string and line[i] == '\"' and (i == 0 or line[i-1] != '\\'):
                 if token != '':
                     tokens.append((token,(cnt_line,i-len(token))))
                     token = ''
@@ -135,7 +135,7 @@ def tokenizer2(text: str) -> list:
                 continue
             if in_string:
                 token += line[i]
-                if line[i] == '\"':
+                if line[i] == '\"' and (i == 0 or line[i-1] != '\\'):
                     in_string = False
                 i += 1
                 continue
