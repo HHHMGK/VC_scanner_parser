@@ -40,7 +40,7 @@ def tokenize(text: str) -> list:
                     in_comment = False
                     in_multi_comment = False
                     i += 2
-                    continue        
+                    continue
                 i += 1
                 continue
             

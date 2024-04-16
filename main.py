@@ -12,6 +12,7 @@ if __name__ == '__main__':
 
     # Path to the source code file
     inpath = Path(args.input_folder) / f"{args.filename}.vc"
+    
     # Read data from source code file
     data = ""
     with open(inpath, 'r') as file:
@@ -30,8 +31,8 @@ if __name__ == '__main__':
     verbosepath = Path(args.output_folder) / f"{args.filename}.verbose.vctok"
     with open(verbosepath, 'w+') as file:
         for i in range(len(tokens)):
-            tok, state, kind = scanner.scan(tokens[i])
+            state, kind = scanner.scan(tokens[i])
             line, col = pos[i]
             # print("tok = ", tok," s,k = ", state, kind)
-            file.write(f"Spelling = \"{tok}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
+            file.write(f"Spelling = \"{tokens[i]}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
     
