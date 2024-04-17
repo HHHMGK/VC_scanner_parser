@@ -1,12 +1,22 @@
 import csv
 
+PATH_TRANSITION_TABLE = "./graph/transition_table.csv"
+PATH_TERMINALS = "./graph/terminals.csv"
+
 def get_transition_table():
-    # Read the transition table
-    data = list(csv.reader(open("./graph/transition_table.csv")))
-    # The first row is the keys
-    # The first column is the states
-    # The remaining cells are the transition states
-    # Also turn the data in cells into int!!
+    """
+    Read the transition table from the csv file
+    The first row is the keys
+    The first column is the states
+    The remaining cells are the transition states
+    Also turn the data in cells into int!!
+    Returns:
+        transTable (2d list) : main transition table
+        states (dict) : map from state to int for table index access
+        keys (dict) : map from key to int for table index access
+    """
+    
+    data = list(csv.reader(open(PATH_TRANSITION_TABLE)))
 
     transTable = []
     for i in range(1,len(data)):
@@ -31,9 +41,17 @@ def get_transition_table():
     return transTable, states, keys
 
 def get_terminals(states : dict):
-    # Read the terminals
-    # Using the states dict to map from state for transTable index access
-    data = list(csv.reader(open("./graph/terminals.csv")))
+    """
+    Read the terminals from the csv file
+    The first column is the terminal states
+    The second column is the kind of the token
+    Args:
+        states (dict) : map from state to int for table index access
+    Returns:
+        terminals (dict) : map from state to the kind of the token
+    """
+    
+    data = list(csv.reader(open(PATH_TERMINALS)))
 
     # Get all the terminals
     terminals = {}
@@ -51,9 +69,16 @@ class StateMachine:
         # Initial state
         self.state = 0
     
-    def transition(self, key) -> bool:
-        # Transition to the next state
-        # Returns False there's no matching transition key from the state
+    def transit(self, key) -> bool:
+        """
+        Transition to the next state
+        Change the state to the next state based on the key and the transition table
+        Using the keys and states to map to table index
+        Args:
+            key (str) : key to transit from the current state
+        Returns:
+            bool : True if the transition is successful, False otherwise
+        """
         if key not in StateMachine.keys:
             return False
         
@@ -62,11 +87,14 @@ class StateMachine:
             return False
         self.state = StateMachine.transTable[self.state][key]
         self.state = StateMachine.states[self.state]
-        # print(self.state, type(self.state))
         return True
 
     def getKind(self):
-        # Returns the kind of the token after reaching terminal state
+        """
+        Return the kind of the token based on the current state - final state of the token
+        Returns:
+            str : kind of the token
+        """
         if self.state not in StateMachine.terminals:
             return "ERROR_STATE_NOT_TERMINAL"
         return StateMachine.terminals[self.state]

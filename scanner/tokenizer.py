@@ -17,10 +17,22 @@ with open(DATAJSON, 'r') as file:
     multi_comment = data['multi_comment']
 
 def tab2space(text : str) -> str:
+    """
+    Replace tab with 4 spaces
+    Args:
+        text (str) : input text
+    """
+    
     return text.replace('\t','    ')
 
 def tokenize(text: str) -> list:
-    # Returns the list of tokens and their positions
+    """
+    Tokenize the input text
+    Returns the list of tokens and their positions
+    Args:
+        text (str) : input text
+    """
+
     lines = tab2space(text).split('\n')
     tokens = []
     pos = []
@@ -77,7 +89,6 @@ def tokenize(text: str) -> list:
             c2 = ''
             if i+1 < len(line):
                 c2 = line[i+1]
-            
             if c2 != '' and c+c2 in operator:
                 if token != '':
                     tokens.append(token)
@@ -87,14 +98,12 @@ def tokenize(text: str) -> list:
                 pos.append((cnt_line,i))
                 i += 2
                 continue
-
             if c in seperator + operator or c==' ':
                 if token != '':
                     tokens.append(token)
                     pos.append((cnt_line,i-len(token)))
                     token = ''
                 if c != ' ':
-                    # tokens.append((c,(cnt_line,i)))
                     tokens.append(c)
                     pos.append((cnt_line,i))
                 i += 1
@@ -106,7 +115,6 @@ def tokenize(text: str) -> list:
 
         cnt_line += 1
 
-    # tokens.append(('$', (cnt_line,0)))
     tokens.append('$')
     pos.append((cnt_line,0))
     return tokens, pos
