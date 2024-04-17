@@ -18,7 +18,7 @@ if __name__ == '__main__':
     if not Path(args.output_folder).exists():
         print(f"Folder {args.output_folder} does not exist")
         exit()
-    
+        
     # Path to the source code file
     inpath = Path(args.input_folder) / f"{args.filename}.vc"
     if not inpath.exists():
@@ -51,4 +51,3 @@ if __name__ == '__main__':
             line, col = pos[i]
             # print("tok = ", tok," s,k = ", state, kind)
             file.write(f"Spelling = \"{tokens[i]}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
-    
