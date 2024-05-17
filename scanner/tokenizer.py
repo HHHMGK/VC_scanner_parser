@@ -27,8 +27,8 @@ def tab2space(text : str) -> str:
 
 def tokenize(text: str) -> list:
     """
-    Tokenize the input text
-    Returns the list of tokens and their positions
+    Tokenize the input \n
+    Returns the list of tokens and their positions \n
     Args:
         text (str) : input text
     """
