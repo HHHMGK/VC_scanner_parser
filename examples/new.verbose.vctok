@@ -1,0 +1,4 @@
+Spelling = "a", kind = 102 [id], position = 0(0)..0(0)
+Spelling = ">-", kind = -1 [ERROR], position = 0(1)..0(1)
+Spelling = "2", kind = 1 [integer], position = 0(3)..0(3)
+Spelling = "$", kind = 101 [end of file], position = 1(0)..1(0)

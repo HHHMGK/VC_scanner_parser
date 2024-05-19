@@ -16,7 +16,7 @@ def scan(token : str, debug = False) -> list:
     if debug:
         print(hex(id(sm.transTable)), "compare to", hex(id(StateMachine.transTable)))
     for c in token:
-        if not sm.transition(c):
+        if not sm.transit(c):
             if debug:
                 print("ERROR in transition = .", token,"."," at c = ",ord(c),".",sep='')
             return -1, "ERROR"
