@@ -27,7 +27,7 @@ INITIALIZER             ->      EXPR | { EXPR LIST_EXPR }
 LIST_EXPR               ->      , EXPR LIST_EXPR | ε
 
 COMPOUND_STMT           ->      { COMPOUND_STMT_1 COMPOUND_STMT_2 }
-COMPOUND_STMT_1         ->      TYPE VARIABLE_DECL COMPOUND_STMT_1 | ε
+COMPOUND_STMT_1         ->      TYPE IDENTIFIER VARIABLE_DECL COMPOUND_STMT_1 | ε
 COMPOUND_STMT_2         ->      STATEMENT COMPOUND_STMT_2 | ε
 
 STATEMENT               ->      IF_STMT | FOR_STMT | WHILE_STMT | BREAK_STMT | CONTINUE_STMT | RETURN_STMT | EXPR_STMT
@@ -74,5 +74,5 @@ ARG_LIST_1              ->      ARG ARG_LIST_LOOP | ε
 ARG_LIST_LOOP           ->      , ARG ARG_LIST_LOOP | ε
 ARG                     ->      EXPR
 
-TYPE                ->      void | boolean | int | float
-IDENTIFIER          ->      id
+TYPE                    ->      void | boolean | int | float
+IDENTIFIER              ->      id
