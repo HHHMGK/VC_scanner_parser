@@ -1,5 +1,7 @@
 from scanner import tokenizer
 from scanner import scanner
+from parser import tree
+
 import argparse
 from pathlib import Path
 
@@ -45,9 +47,16 @@ if __name__ == '__main__':
 
     # Write the verbose tokens to .verbose.vctok file
     verbosepath = Path(args.output_folder) / f"{args.filename}.verbose.vctok"
+    inputs = []
     with open(verbosepath, 'w+') as file:
         for i in range(len(tokens)):
             state, kind = scanner.scan(tokens[i])
             line, col = pos[i]
             # print("tok = ", tok," s,k = ", state, kind)
             file.write(f"Spelling = \"{tokens[i]}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
+            # inputs.append([tokens[i], kind, line])
+            inputs.append(tokens[i])
+    print(inputs)
+    ast = tree.Tree(inputs)
+    ast.print_tree(ast.root)
+
