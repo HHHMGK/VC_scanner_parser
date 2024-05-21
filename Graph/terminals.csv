@@ -1,40 +1,40 @@
 State,Type,Spelling
-1,integer,
-2,float,
-4,float,
-7,arithmetic operator,
-8,arithmetic operator,
-9,arithmetic operator,
-10,arithmetic operator,
-11,assignment operator,
-12,equality operator,
-13,relational operator,
-14,relational operator,
-15,relational operator,
-16,relational operator,
-17,logical operator,
-18,equality operator,
-20,logical operator,
-22,logical operator,
-23,separator,
-24,separator,
-25,separator,
-26,separator,
-27,separator,
-28,separator,
-29,separator,
-30,separator,
+1,int_literal,
+2,float_literal,
+4,float_literal,
+7,+,
+8,-,
+9,/,
+10,*,
+11,=,
+12,==,
+13,<,
+14,<=,
+15,>,
+16,>=,
+17,!,
+18,!=,
+20,||,
+22,&&,
+23,{,
+24,},
+25,[,
+26,],
+27,(,
+28,),
+29,;,
+30,",",
 31,id,
 32,id,
 33,id,
 34,id,
 35,id,
 36,id,
-37,keyword,boolean 
+37,boolean,boolean 
 38,id,
 39,id,
 40,id,
-41,keyword,break 
+41,break,break 
 42,id,
 43,id,
 44,id,
@@ -42,45 +42,45 @@ State,Type,Spelling
 46,id,
 47,id,
 48,id,
-49,keyword,continue
+49,continue,continue
 50,id,
 51,id,
 52,id,
-53,keyword,else
+53,else,else
 54,id,
 55,id,
-56,keyword,for
+56,for,for
 57,id,
 58,id,
 59,id,
-60,keyword,float
+60,float,float
 61,id,
 62,id,
 63,id,
-64,boolean literal,false
+64,bool_literal,false
 65,id,
-66,keyword,if
+66,if,if
 67,id,
-68,keyword,int
+68,int,int
 69,id,
 70,id,
 71,id,
 72,id,
 73,id,
-74,keyword,return
+74,return,return
 75,id,
 76,id,
 77,id,
-78,keyword,void
+78,void,void
 79,id,
 80,id,
 81,id,
 82,id,
-83,keyword,while
+83,while,while
 84,id,
 85,id,
 86,id,
-87,boolean literal,true
-90,string,
+87,bool_literal,true
+90,string_literal,
 999,id,
 888,end of file,
