@@ -47,7 +47,8 @@ if __name__ == '__main__':
 
     # Write the verbose tokens to .verbose.vctok file
     verbosepath = Path(args.output_folder) / f"{args.filename}.verbose.vctok"
-    inputs = []
+    kinds = []
+    lines = []
     with open(verbosepath, 'w+') as file:
         for i in range(len(tokens)):
             state, kind = scanner.scan(tokens[i])
@@ -55,8 +56,20 @@ if __name__ == '__main__':
             # print("tok = ", tok," s,k = ", state, kind)
             file.write(f"Spelling = \"{tokens[i]}\", kind = {state} [{kind}], position = {line}({col})..{line}({col+len(tok)-1})\n")
             # inputs.append([tokens[i], kind, line])
-            inputs.append(tokens[i])
-    print(inputs)
-    ast = tree.Tree(inputs)
+            
+            kinds.append(kind)
+            lines.append(line)
+    print(tokens)
+    print(kinds)
+    print(lines)
+    ast = tree.Tree(tokens, kinds, lines)
+    # ast.print_tree(ast.root)
+    # print('After compress*******************************************')
+    ast.node_compress(ast.root)
     ast.print_tree(ast.root)
+
+    # ast.print_parsed(ast.root)
+    # print()
+    ast.print_parsed_in_lines(ast.root)
+    # print(ast.root.print())
 
