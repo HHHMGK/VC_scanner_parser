@@ -12,7 +12,7 @@ Run the main file with the following command:
 python main.py --filename <filename>
 ```
 
-Where `<filename>` is the name of the file you want to parse, the program will locate the `<filename>.vc` file in the default `./examples/` directory and write to the `<filename>.vctok` and `<filename>.verbose.vctok` files in the same directory
+Where `<filename>` is the name of the file you want to parse, the program will locate the `<filename>.vc` file in the default `./examples/` directory and write to the `<filename>.vctok`, `<filename>.verbose.vctok` and `<filename>.vcps` files in the same directory
 Example:
 
 ```bash

@@ -1,17 +1,17 @@
 from scanner import tokenizer
 from scanner import scanner
-from parser import tree
+from parser import parser
 
 import argparse
 from pathlib import Path
 
 if __name__ == '__main__':
     # Parse the arguments
-    parser = argparse.ArgumentParser(description='Scanner phase of Compiling a file')
-    parser.add_argument('--input_folder', type=str, default="./examples/", help='Path to the folder of the file')
-    parser.add_argument('--output_folder', type=str, default="./examples/", help='Path to the folder of the output file')
-    parser.add_argument('--filename', type=str, default="example_gcd", help='Name of the file')
-    args = parser.parse_args()
+    parg = argparse.ArgumentParser(description='Scanner phase of Compiling a file')
+    parg.add_argument('--input_folder', type=str, default="./examples/", help='Path to the folder of the file')
+    parg.add_argument('--output_folder', type=str, default="./examples/", help='Path to the folder of the output file')
+    parg.add_argument('--filename', type=str, default="example_gcd", help='Name of the file')
+    args = parg.parse_args()
 
     # Check folders existence
     if not Path(args.input_folder).exists():
@@ -59,17 +59,10 @@ if __name__ == '__main__':
             
             kinds.append(kind)
             lines.append(line)
-    print(tokens)
-    print(kinds)
-    print(lines)
-    ast = tree.Tree(tokens, kinds, lines)
-    # ast.print_tree(ast.root)
-    # print('After compress*******************************************')
-    ast.node_compress(ast.root)
-    ast.print_tree(ast.root)
 
-    # ast.print_parsed(ast.root)
-    # print()
-    ast.print_parsed_in_lines(ast.root)
-    # print(ast.root.print())
-
+    # Write the parsed data to .vcps file        
+    pspath = Path(args.output_folder) / f"{args.filename}.vcps"
+    str_list = parser.parse(tokens, kinds, lines)
+    with open(pspath, 'w+') as file:
+        for str in str_list:
+            file.write(str + "\n")
